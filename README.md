@@ -2,7 +2,7 @@
 
 # Introduction
 
-## PART ONE
+### Part One
 
 The Trypanosoma brucei (T. brucei) parasite is a single-celled protozoan parasite that causes Human African Trypanosomiasis (HAT) which is also more commonly known as sleeping sickness. The parasite itself is transmitted by the tsetse fly and cycles between stages in the human host and the fly vector. Once the human is infected, T. brucei can be first detected within the bloodstream and as infection progresses the infection spreads into other tissues and fluids within the body. The disease becomes fatal when the parasite crosses the blood-brain barrier and enters the central nervous system causing severe neurological symptoms, coma and then eventually death. 
 
@@ -10,7 +10,7 @@ The aim of the analysis within this project is to investigate how gene expressio
 
 The samples used within this part of the study were cells in blood and cells in central spinal fluid (CSF) which help us to investigate stages I and II respectively of the disease. Other studies from the cohort looked at comparing a range of other sources including cells in Adipose tissue, cells in culture and cells from rat blood. These studies will also help to provide different comparisons of expression levels to further develop the understanding of this parasite. 
 
-## PART TWO
+### Part One
 
 The second part of the analysis focused on analysing human cancer samples for differential gene expression, specifically comparing glioma tissue with a glioma cell line. Gliomas are tumours that arise from glial cells within the central nervous system. By comparing these two sample types, the aim is to identify differences in gene expression that may reflect tumour biology and changes in cellular processes associated with disease progression. 
 
@@ -73,58 +73,58 @@ Each numbered step below corresponds to the numbered script. The scripts should 
 **1.**	QC data 
 Using fastqc to produce quality control data that gives you insight to the sequence length, data quality, reliability etc of the data you are analysing. 
 
-Script name: 1_QC.sh
-Input(s): fastq files
-Output(s): html files
+Script name: 1_QC.sh  
+Input(s): fastq files  
+Output(s): html files  
 
 **2.**	Trim data
 Trim-galore allows for the datasets to be appropriately trimmed for mapping 
 
-Script name: 2_Trim.sh
-Input(s): fastq files
-Output(s): compressed fastq files (fq.gz)
+Script name: 2_Trim.sh  
+Input(s): fastq files  
+Output(s): compressed fastq files (fq.gz)  
 
 **3.**	Mapping
 
 This step is split into two parts as there needs to be some prep done before the reads can be mapped. Firstly, in step A, bowtie2-build is used to create a bowtie index for mapping and then in step B, bowtie2 is used to map each trimmed fastq file to the reference genome. 
 
-Script name: 3a_BowtiePrep.sh
-Input(s): TBrucei Reference genome
-Output(s): Indexed Genome
+Script name: 3a_BowtiePrep.sh  
+Input(s): TBrucei Reference genome  
+Output(s): Indexed Genome  
 
-Script name: 3b_Bowtie.sh
-Input(s): compressed fastq files and indexed genome
-Output(s): compressed sam file 
+Script name: 3b_Bowtie.sh  
+Input(s): compressed fastq files and indexed genome  
+Output(s): compressed sam file  
 
 **4.**	Creating BAM files
 
 Again, this step is split into two parts as well. Script 4a converts the SAM files into BAM files first and then script 4b sorts the bam files. 
 
 Script name: 4a_SamToBam.sh  
-Input(s): compressed sam files
-Output(s): bam file, compressed sorted bam file
+Input(s): compressed sam files  
+Output(s): bam file, compressed sorted bam file  
 
-Script name: 4b_SortBam.sh 
-Input(s): compressed sorted bam
-Output(s): aligned bam file, sorted .bam.bai file
+Script name: 4b_SortBam.sh  
+Input(s): compressed sorted bam  
+Output(s): aligned bam file, sorted .bam.bai file  
 
 **5.**	Htseq
 
 Htseq helps to turn the sequencing data into counts for further analysis. In this analysis there are scripts for both the BAM files and SAM files to be able to produce data for both sets. 
 
-Script name: 5_HtseqBam.sh 
-Input(s): .bam files, TBrucei .gff reference genome
-Output(s): tsv file
+Script name: 5_HtseqBam.sh  
+Input(s): .bam files, TBrucei .gff reference genome  
+Output(s): tsv file  
 
-Script name: 5_HtseqSam.sh
-Input(s): compressed sam files, TBrucei .gff reference genome
-Output(s): txt file
+Script name: 5_HtseqSam.sh  
+Input(s): compressed sam files, TBrucei .gff reference genome  
+Output(s): txt file  
 
 ### Additional Analysis and Visualisation 
 
 **A1.** Using IGV to visualise 
 
-Following the instructions [here](https://igv.org) download IGV and use the software to look at the distribution of mapped reads for one or more of the samples. 
+Following the instructions [here](https://igv.org) to download IGV and use the software to look at the distribution of mapped reads for one or more of the samples. 
 
 For A2 – A4 below, all the visualisations can be done using the AA1 script. This script should be run in R. 
 
@@ -134,35 +134,32 @@ For A2 – A4 below, all the visualisations can be done using the AA1 script. Th
 
 **A4.** Use R to create PCA graph of samples
 
-Script name:
-Input(s):
-Output(s): 
-
-
 ### Part Two
 
 **6.**	STAR Indexing 
 
 For this script, ensure that both of the Homo sapien GRCh38 genomes have been unzipped before running the script. This can be done by the following line:  
-
+```
 unzip filename.zip
+```
 
-Script name:
-Input(s):
-Output(s): 
+Script name: 6_StarIndexing.sh
+Input(s): GRCh38.fa and GRCH38.gtf reference genomes
+Output(s): aligned sam file, log files, readspergene.tab file, SJ.tab file  
 
-For your reference, the files provided within the Reference Genomes directory have been downloaded from: www.ensembl.org 
+For your reference, the files provided within the Reference Genomes directory have been downloaded from [here](www.ensembl.org) 
 
 **7.**	Run STAR
 STAR was run on both the glioma cell line (Script 7a) and the glioma tissue (Script 7b). 
 
-Script name:
-Input(s):
-Output(s): 
+Script name: 7a_StarGCellLine.sh  
+Input(s): paired compressed fastq files  
+Output(s): aligned sam file, log files, readspergene.tab file, SJ.tab file  
 
-Script name:
-Input(s):
-Output(s): 
+Script name: 7b_StarGTissue.sh  
+Input(s): paired compressed fastq files  
+Output(s): aligned sam file, log files, readspergene.tab file, SJ.tab file  
+
 
 You can then do further analysis on the human cancer samples including: DESeq2, a heatmap and a PCA graph.
 
