@@ -143,9 +143,9 @@ For this script, ensure that both of the Homo sapien GRCh38 genomes have been un
 unzip filename.zip
 ```
 
-Script name: 6_StarIndexing.sh
-Input(s): GRCh38.fa and GRCH38.gtf reference genomes
-Output(s): aligned sam file, log files, readspergene.tab file, SJ.tab file  
+Script name: 6_StarIndexing.sh  
+Input(s): GRCh38.fa and GRCH38.gtf reference genomes  
+Output(s): indexed genome   
 
 For your reference, the files provided within the Reference Genomes directory have been downloaded from [here](www.ensembl.org) 
 
@@ -162,4 +162,11 @@ Output(s): aligned sam file, log files, readspergene.tab file, SJ.tab file
 
 
 You can then do further analysis on the human cancer samples including: DESeq2, a heatmap and a PCA graph.
+
+### Authors
+
+Caleb Thornber - mbyct9@nottingham.ac.uk  
+Hannah Byrne - mbxhb5@nottingham.ac.uk  
+Layla Meghjee - mbxlm9@nottingham.ac.uk  
+Shahwar Nadeem - mzysn15@nottingham.ac.uk  
 
