@@ -17,6 +17,17 @@ The second part of the analysis focused on analysing human cancer samples for di
 
 # Prerequisites 
 
+## Cloning the GIT repository
+
+The clone this GIT repo to your local computer follow these steps:  
+
+1. Copy the URL for this git repo: https://github.com/laylameghjee/LIFE4136_2526_R2G2.git  
+2. Open the terminal on your local computer
+3. Navigate to the directory/location where you want to clone the repo
+4. Type ```git clone``` followed by the URL and then press enter
+
+This will clone the entire repo to your chosen directory, giving you access to all the files and scripts. If there are any issues with cloning, use the [GitHub Guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to help. 
+
 ## Tools
 
 To carry out the analysis required in this study a range of tools and programmes were used, they are listed below with the corresponding versions. To replicate these analyses the same tools will need to be used by either creating your own conda environment and installing them individually or you can use the yml file which already has the tools downloaded into the conda environment. The easiest way is to use the yml file already provided.
