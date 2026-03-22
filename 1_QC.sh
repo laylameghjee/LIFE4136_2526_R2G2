@@ -14,12 +14,10 @@
 source $HOME/.bash_profile
 conda activate tbrucei2
 
-# Setting fastq file location
-cd ./blood
-
-mkdir ../qc/blood/ #Creates output diorectory
+#creates and sets output directory
+mkdir ../qc/blood/
  
-SAMPLE="Blood"$SLURM_ARRAY_TASK_ID #Makes smaple name for arrays
+SAMPLE="Blood"$SLURM_ARRAY_TASK_ID #Makes sample name for arrays
 FASTQ=${SAMPLE}.fastq.gz #Creates FASTQ file names
 OUTDIR=../qc/blood/ #Sets output
 
@@ -28,11 +26,9 @@ fastqc \
  -t 8 \
  --fastq "$FASTQ" \
  -o "$OUTDIR"
-#Runs fastqc
-
 
 # Setting fastq file location
-cd ../csf #Moves to csf directory
+cd ../qc #Moves back to qc directory
 mkdir ../qc/csf #Creates output directory
 
 SAMPLE="CSF"$SLURM_ARRAY_TASK_ID #Makes smaple name for arrays
@@ -44,7 +40,6 @@ fastqc \
  -t 8 \
  --fastq "$FASTQ" \
  -o "$OUTDIR"
-#Runs fastqc
 
 # Deactivate Conda
 conda deactivate
