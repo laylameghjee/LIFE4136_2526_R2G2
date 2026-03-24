@@ -10,7 +10,7 @@ The aim of the analysis within this project is to investigate how gene expressio
 
 The samples used within this part of the study were cells in blood and cells in central spinal fluid (CSF) which help us to investigate stages I and II respectively of the disease. Other studies from the cohort looked at comparing a range of other sources including cells in Adipose tissue, cells in culture and cells from rat blood. These studies will also help to provide different comparisons of expression levels to further develop the understanding of this parasite. 
 
-### Part One
+### Part Two
 
 The second part of the analysis focused on analysing human cancer samples for differential gene expression, specifically comparing glioma tissue with a glioma cell line. Gliomas are tumours that arise from glial cells within the central nervous system. By comparing these two sample types, the aim is to identify differences in gene expression that may reflect tumour biology and changes in cellular processes associated with disease progression. 
 
@@ -19,7 +19,7 @@ The second part of the analysis focused on analysing human cancer samples for di
 
 ## Cloning the GIT repository
 
-The clone this GIT repo to your local computer follow these steps:  
+To clone this GIT repo to your local computer follow these steps:  
 
 1. Copy the URL for this git repo: https://github.com/laylameghjee/LIFE4136_2526_R2G2.git  
 2. Open the terminal on your local computer
@@ -67,13 +67,23 @@ It is vital to specifiy the version of python, so ensure that part is included. 
 |bowtie2	 | 2.5.5   | [bowtie2](https://github.com/BenLangmead/bowtie2)         |
 |htseq	     | 2.1.2   | [htseq](https://github.com/simon-anders/htseq)            |
 |star	     | 2.7.11b | [star](https://github.com/alexdobin/STAR)                 |
-
+|samtools    | 1.22.1  | [samtools](https://github.com/samtools/samtools)          |
 
 In order to activate and deactivate the conda environment use the code below
 ```
 conda activate tbrucei
 conda deactivate 
 ```
+
+### R and R Studio
+
+If you don't already have either R or R studio installed, you will need to install one of them for the additional analysis within this project. Please follow the istallation instructions [here](https://rstudio-education.github.io/hopr/starting.html) ensuring you follow the correct instructions for your local machine. 
+
+Any additional packages needed within R and R studio are specified within the scripts and the scripts will install them for you. 
+
+### IGV
+
+If you don't already have IGV intalled and set up, follwo the instructions [here](https://igv.org) to download it so it is ready for the additional analysis. 
 
 # Analysis
 
@@ -137,7 +147,7 @@ Output(s): txt file
 
 Following the instructions [here](https://igv.org) to download IGV and use the software to look at the distribution of mapped reads for one or more of the samples. 
 
-For A2 – A4 below, all the visualisations can be done using the AA1 script. This script should be run in R. 
+For A2 – A4 below, all the visualisations can be done using the AA1 script. This script should be run in R or R Studio.
 
 **A2.** Use DESeq2 in R to visualise 
 
