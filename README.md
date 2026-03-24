@@ -145,7 +145,7 @@ Output(s): txt file
 
 **A1.** Using IGV to visualise 
 
-Following the instructions [here](https://igv.org) to download IGV and use the software to look at the distribution of mapped reads for one or more of the samples. 
+Use the IGV software to look at the distribution of mapped reads for one or more of the samples. 
 
 For A2 – A4 below, all the visualisations can be done using the AA1 script. This script should be run in R or R Studio.
 

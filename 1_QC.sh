@@ -10,16 +10,27 @@
 #SBATCH --mail-user=XXX@nottingham.ac.uk
 #SBATCH --array=1-5
 
-# Importing Conda Environment
+#Importing and activating  Conda Environment
 source $HOME/.bash_profile
-conda activate tbrucei2
+conda activate tbrucei
 
-#creates and sets output directory
-mkdir ../qc/blood/
- 
-SAMPLE="Blood"$SLURM_ARRAY_TASK_ID #Makes sample name for arrays
-FASTQ=${SAMPLE}.fastq.gz #Creates FASTQ file names
-OUTDIR=../qc/blood/ #Sets output
+#creates and sets output directory 
+mkdir ../qc/
+#moves into qc directory and makes blood directory
+cd qc
+mkdir ../blood/
+
+#makes sample name for arrays
+SAMPLE="Blood"$SLURM_ARRAY_TASK_ID
+
+#creates FASTQ file names
+FASTQ=${SAMPLE}.fastq.gz
+
+#sets input
+#replace XXX with filepath to the fastq files
+INDIR=XXX
+#sets output
+OUTDIR=../qc/blood/
 
 # Running QC Analysis
 fastqc \
@@ -27,13 +38,16 @@ fastqc \
  --fastq "$FASTQ" \
  -o "$OUTDIR"
 
-# Setting fastq file location
 cd ../qc #Moves back to qc directory
-mkdir ../qc/csf #Creates output directory
+mkdir ../csf #Creates output directory
 
 SAMPLE="CSF"$SLURM_ARRAY_TASK_ID #Makes smaple name for arrays
 FASTQ=${SAMPLE}.fastq.gz #Creates FASTQ file names
 OUTDIR=../qc/csf/ #Sets output
+
+#sets input
+#replace XXX with filepath to the fastq files
+INDIR=XXX
 
 # Running QC Analysis
 fastqc \
