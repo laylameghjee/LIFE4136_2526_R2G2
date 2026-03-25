@@ -1,5 +1,33 @@
 # LIFE4136 - Rotation 2 Group 2
 
+# Repository Outline
+
+[Project Overview](#project-overview)
+[Biological Background](#biological-background)
+- [Part One](#part-one-1)
+- [Part Two](#part-two-1)
+[Prerequisites](#prerequisites)
+- [Data Overview](#data-overview)
+  -- [Part One](#part-one-2)
+  -- [Part Two](#part-two-2)
+  -- [Reference Files](reference-files)
+- [Cloning the repository](cloning-the-repository)
+[Tools](#tools)
+- [Environment Set Up](#environment-set-up)
+ --[Creating environment from yml](#creating-environment-from-yml)
+ --[Creating environment yourself](#creating-environment-yourself)
+- [Main command-line tools](#main-command-line-tools)
+- [Further Analysis Tools](#further-analysis-tools)
+ -- [R and RStudio](#r-and-rstudio)
+ -- [IGV](#igv)
+ [Analysis](#analysis)
+ - [Part One](#part-one-3)
+  -- [Aditional Analysis and Visualisation](#aditional-analysis-and-visualisation)
+ - [Part Two](#part-two-3)
+ - [Troubleshooting](#troubleshooting)
+ [Authors](#authors)
+
+
 # Project Overview 
 
 This repository contains the scripts, reference files, and documentation used for the RNA-seq analysis completed for the LIFE4136 25/26 module. The repository is intended to allow another user to understand the workflow, recreate the computational environment and reproduce the analysis steps in the correct order. 
@@ -45,7 +73,7 @@ File Size - between 877M and 1.9G
 
 ### Reference Files
 
-All references files used within this project are stored within the ```ReferenceGenomes ``` directory.
+All references files used within this project are stored within the ```ReferenceGenomes ``` directory. Contains T brucei and Homo sapien (GRCH38) refernece genome and annotation files that are used for alignment and indexing. 
 
 
 ## Cloning the Git repository
@@ -121,14 +149,14 @@ If you don't already have either R or RStudio installed, you will need to instal
 Any additional packages needed within R and RStudio are specified within the scripts and the scripts will install them for you but they are listed below. 
 
 
-| Tool        | Version | 	GitHub Links                                           |
-| ----        | ------- | --------------------------------------------------------- |
-|DESeq2       |	0.12.1 | [fastqc](https://github.com/s-andrews/FastQC)             |
-|ggplot2      |	0.6.11 | [trim galore](https://github.com/FelixKrueger/TrimGalore) |
-|pheatmap	  | 2.5.5   | [bowtie2](https://github.com/BenLangmead/bowtie2)         |
-|readr        | 2.1.2   | [htseq](https://github.com/simon-anders/htseq)            |
-|tidyverse	  | 2.7.11b | [star](https://github.com/alexdobin/STAR)                 |
-|RColorBrewer | 1.22.1  | [samtools](https://github.com/samtools/samtools)          |
+| Tool        | Version | 	        Links                                                          |
+| ----        | ------- | -------------------------------------------------------------------------|
+|DESeq2       |	1.50.1  | [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)|
+|ggplot2      |	4.0.0   | [ggplot2](https://ggplot2.tidyverse.org)                                 |
+|pheatmap	  | 1.0.13  | [pheatmap](https://cran.r-project.org/web/packages/pheatmap/pheatmap.pdf)|
+|readr        | 2.1.5   | [readr](https://readr.tidyverse.org)                                     |
+|tidyverse	  | 2.0.0   | [tidyverse](https://tidyverse.org)                                       |
+|RColorBrewer | 1.1.3   | [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)|
 
 
 ### IGV
