@@ -1,21 +1,23 @@
 # LIFE4136 - Rotation 2 Group 2
 
-# Repository Outline
+## Repository Outline
 
 [Project Overview](#project-overview)  
 [Biological Background](#biological-background)  
 [Prerequisites](#prerequisites)    
-[Tools](#tools)     
+[Tools](#tools)   
+[Analysis](#analysis)  
+[Troubleshooting](#troubleshooting)    
 [Authors](#authors)  
 
 
-# Project Overview 
+## Project Overview 
 
 This repository contains the scripts, reference files, and documentation used for the RNA-seq analysis completed for the LIFE4136 25/26 module. The repository is intended to allow another user to understand the workflow, recreate the computational environment and reproduce the analysis steps in the correct order. 
 
-## Biological Background
+### Biological Background
 
-### Part One: Trypanosoma brucei
+**Part One: Trypanosoma brucei**
 
 The Trypanosoma brucei (T. brucei) parasite is a single-celled protozoan parasite that causes Human African Trypanosomiasis (HAT) which is also more commonly known as sleeping sickness. The parasite itself is transmitted by the tsetse fly and cycles between stages in the human host and the fly vector. Once the human is infected, T. brucei can be first detected within the bloodstream and as infection progresses the infection spreads into other tissues and fluids within the body. The disease becomes fatal when the parasite crosses the blood-brain barrier and enters the central nervous system causing severe neurological symptoms, coma and then eventually death. 
 
@@ -23,16 +25,16 @@ The aim of the analysis within part one is to investigate how gene expression ch
 
 The samples used within this part of the study were cells in blood and cells in cerebrospinal fluid (CSF) which help us to investigate stages I and II respectively of the disease. Other studies from the cohort looked at comparing a range of other sources including cells in Adipose tissue, cells in culture and cells from rat blood. These studies will also help to provide different comparisons of expression levels to further develop the understanding of this parasite. 
 
-### Part Two: Human Glioma Analysis
+**Part Two: Human Glioma Analysis**
 
 Part two of the analysis focused on analysing human cancer samples for differential gene expression, specifically comparing glioma tissue with a glioma cell line. Gliomas are tumours that arise from glial cells within the central nervous system. By comparing these two sample types, the aim is to identify differences in gene expression that may reflect tumour biology and changes in cellular processes associated with disease progression. 
 
 
-# Prerequisites 
+## Prerequisites 
 
 ## Data Overview 
 
-### Part One: Trypanosoma brucei
+Part One: Trypanosoma brucei  
 
 Organism - Trypanosoma brucei  
 Sample Types - blood and cerebrospinal fluid  
@@ -42,22 +44,22 @@ Read Type - single end
 Original Input format - compressed FASTQ files  
 File Size - between 2.5G and 7.4G
 
-### Part Two: Human Glioma RNA-seq data
+Part Two: Human Glioma RNA-seq data  
 
 Organism - Homo sapiens  
 Sample Types - glioma tissue and glioma cell line  
 Number of samples - 10 Biological Samples producing 20 FASTQ files
-Sample IDs - ERR1404775_1 & ERR1404775_2 - ERR1404780_1 & ERR1404780_2 and ERR1404793_1 & ERR1404793_2 - ERR1404796_1 & ERR1404796_2  
+Sample IDs - ERR1404775_1 & ERR1404775_2 - ERR1404780_1 & ERR1404780_2 and ERR1404793_1 & ERR1404793_2 - ERR1404796_1 & ERR1404796_2
 Read Type - paired end  
 Original Input format - compressed FASTQ files 
 File Size - between 877M and 1.9G 
 
 ### Reference Files
 
-All references files used within this project are stored within the ```ReferenceGenomes ``` directory. Contains T brucei and Homo sapien (GRCH38) refernece genome and annotation files that are used for alignment and indexing. 
+All references files used within this project are stored within the ```ReferenceGenomes ``` directory. Contains T. brucei and Homo sapiens (GRCh38) reference genome and annotation files that are used for alignment and indexing. For your reference, the files provided have been downloaded [here](https://tritrypdb.org) for the T. brucei and [here](https://www.ensembl.org) for the Homo sapiens (GRCh38). 
 
 
-## Cloning the Git repository
+### Cloning the Git repository
 
 To clone this Git repo to your local computer follow these steps:  
 
@@ -68,13 +70,13 @@ To clone this Git repo to your local computer follow these steps:
 
 This will clone the entire repo to your chosen directory, giving you access to all the files and scripts. If there are any issues with cloning, use the [GitHub Guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to help. 
 
-# Tools
+## Tools
 
-To carry out the analysis required in this study a range of tools and programmes were used, they are listed below with the corresponding versions. To replicate these analyses the same tools will need to be used by either creating your own conda environment and installing them individually or you can use the yml file which already has the tools downloaded into the conda environment. The easiest way is to use the yml file already provided.
+To carry out the analysis required in this study a range of tools and programmes were used, they are listed below with the corresponding versions. To replicate this analysis the same tools will need to be used by either creating your own conda environment and installing them individually or you can use the yml file which already has the tools downloaded into the conda environment. The easiest way is to use the yml file already provided.
 
-## Environment set up 
+### Environment set up 
 
-### Creating environment from yml file
+Creating environment from yml file  
 
 Ensuring yml file is in your current working directory, type the following into your command line
 ```
@@ -85,14 +87,14 @@ To check that the installation has worked use the following code
 ```
 conda env list 
 ```
-This should have tbrucei in the list if it has created correctly. 
+This should have ```tbrucei``` in the list if it has created correctly. 
 
 If you wish to see all the packages and their versions within the environment use the following code
 ```
 conda list -n tbrucei
 ```
 
-### Creating a conda environment by yourself 
+Creating a conda environment by yourself  
 
 To create the conda environment use:
 ```
@@ -100,7 +102,7 @@ conda create python=3.10 -n tbrucei
 ``` 
 It is vital to specify the version of python, so ensure that part is included. 
 
-## Main command-line tools
+### Main command-line tools  
 
 Once the conda environment has been created then install the following packages. Install by typing `conda install` followed by the package name and then version into the command line. An example would be 
 ```conda install fastqc=0.12.1```
@@ -121,9 +123,9 @@ conda activate tbrucei
 conda deactivate 
 ```
 
-## Further Analysis tools
+### Further Analysis tools
 
-### R and RStudio
+R and RStudio  
 
 If you don't already have either R or RStudio installed, you will need to install one of them for the additional analysis within this project. Please follow the installation instructions [here](https://rstudio-education.github.io/hopr/starting.html) ensuring you follow the correct instructions for your local machine. 
 
@@ -140,11 +142,11 @@ Any additional packages needed within R and RStudio are specified within the scr
 |RColorBrewer | 1.1.3   | [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html)|
 
 
-### IGV
+IGV  
 
 If you don't already have IGV installed and set up, follow the instructions [here](https://igv.org) to download it so it is ready for the additional analysis. 
 
-# Analysis
+## Analysis
 
 Each numbered step below corresponds to the numbered script. The scripts should be run in numerical order. Please note any sections denoted with ‘XXX’ must be replaced by your own paths or file names. Paths must be either:  
  - Relative paths if your files are arranged within the repository structure  
@@ -152,7 +154,7 @@ Each numbered step below corresponds to the numbered script. The scripts should 
 
 These scripts were developed for use on an HPC system using SLURM. They may also be adapted for local use, although some steps may take longer and/or require more memory. 
 
-## Part One
+### Part One
 
 **1.**	Quality Control  
 Using FastQC to produce quality control data that gives insight into the sequence length, data quality, reliability etc of the data you are analysing. 
@@ -210,7 +212,7 @@ Output(s): TXT count files
 
 Use the IGV software to look at the distribution of mapped reads for one or more of the samples. 
 
-For A2 – A4 below, all the visualisations can be done using the AA1 script. This script should be run in R or RStudio. Any packages used within these analysis install as part of the scripts. 
+For A2 – A4 below, all the visualisations can be done using the AA1 script. This script should be run in R or RStudio. Any packages used within this analysis install as part of the scripts. 
 
 **A2.** Use DESeq2 in R to visualise 
 
@@ -218,7 +220,7 @@ For A2 – A4 below, all the visualisations can be done using the AA1 script. Th
 
 **A4.** Use R to create PCA graph of samples
 
-## Part Two
+### Part Two
 
 **6.**	STAR Indexing 
 
@@ -231,13 +233,11 @@ Script name: 6_StarIndexing.sh
 Input(s): GRCh38.fa and GRCH38.gtf reference genomes  
 Output(s): STAR genome index
 
-For your reference, the files provided within the Reference Genomes directory have been downloaded from [here](https://www.ensembl.org) 
-
 **7.**	Run STAR
 STAR was run on both the glioma cell line (Script 7a) and the glioma tissue (Script 7b). 
 
 Script name: 7a_StarGCellLine.sh  
-Input(s): paired end FASTQ files 
+Input(s): paired-end FASTQ files 
 Output(s): aligned sam file, log files, readspergene.tab file, SJ.tab file  
 
 Script name: 7b_StarGTissue.sh  
@@ -254,7 +254,7 @@ Input files cannot be found
 - Check all input files are stored in the correct locations  
 
 Reference genomes missing  
-- Confirm all required files are present in the ```ReferenceGenomes` directory  
+- Confirm all required files are present in the ```ReferenceGenomes``` directory  
 - For Part Two ensure you have unzipped the files before running the scripts  
 
 Scripts not running on a local machine 
@@ -266,10 +266,10 @@ R packages not installing
 - If the R packages are not installing correctly when running the script, try running just the installation lines alone
 
 Script not running as expected 
-- Ensure that the previous step has ran correctly and the output files are what are expected
+- Ensure that the previous step has run correctly and the output files are what are expected
 - Ensure all input paths are correct
 
-# Authors
+## Authors
 
 Caleb Thornber - mbyct9@nottingham.ac.uk  
 Hannah Byrne - mbxhb5@nottingham.ac.uk  
