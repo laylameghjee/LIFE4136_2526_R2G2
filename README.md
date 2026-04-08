@@ -4,8 +4,13 @@
 
 [Project Overview](#project-overview)  
 [Biological Background](#biological-background)  
-[Prerequisites](#prerequisites)    
+[Prerequisites](#prerequisites)  
+- [Data Overview](#data-overview)  
+-- [Reference Files](#reference-files)  
+-- [Cloning the Git repository](#cloning-the-git-repository)  
 [Tools](#tools)   
+- [Environment Set up](#environment-set-up)
+- []
 [Analysis](#analysis)  
 [Troubleshooting](#troubleshooting)    
 [Authors](#authors)  
