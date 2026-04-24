@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --partition=defq
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=5
-#SBATCH --cpus-per-task=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=8
 #SBATCH --mem=64g
 #SBATCH --time=10:00:00
 #SBATCH --job-name=QC
@@ -14,23 +14,23 @@
 source $HOME/.bash_profile
 conda activate tbrucei
 
+#sets input  directory
+#replace XXX with filepath to the fastq files
+INDIR=XXX
+cd "$INDIR"
+
 #creates and sets output directory 
-mkdir ../qc/
-#moves into qc directory and makes blood directory
-cd qc
-mkdir ../blood/
+mkdir -p ../qc/blood
+mkdir -p ../qc/csf
 
 #makes sample name for arrays
 SAMPLE="Blood"$SLURM_ARRAY_TASK_ID
 
 #creates FASTQ file names
-FASTQ=${SAMPLE}.fastq.gz
+FASTQ=${INDIR}/${SAMPLE}.fastq.gz
 
-#sets input
-#replace XXX with filepath to the fastq files
-INDIR=XXX
 #sets output
-OUTDIR=../qc/blood/
+OUTDIR=../qc/blood
 
 # Running QC Analysis
 fastqc \
@@ -38,16 +38,15 @@ fastqc \
  --fastq "$FASTQ" \
  -o "$OUTDIR"
 
-cd ../qc #Moves back to qc directory
-mkdir ../csf #Creates output directory
 
-SAMPLE="CSF"$SLURM_ARRAY_TASK_ID #Makes smaple name for arrays
-FASTQ=${SAMPLE}.fastq.gz #Creates FASTQ file names
-OUTDIR=../qc/csf/ #Sets output
+#makes sample name for arrays
+SAMPLE="CSF"$SLURM_ARRAY_TASK_ID
 
-#sets input
-#replace XXX with filepath to the fastq files
-INDIR=XXX
+#creates FASTQ file names
+FASTQ=${INDIR}/${SAMPLE}.fastq.gz 
+
+#sets output
+OUTDIR=../qc/csf
 
 # Running QC Analysis
 fastqc \
@@ -57,5 +56,3 @@ fastqc \
 
 # Deactivate Conda
 conda deactivate
-
-

@@ -14,7 +14,12 @@
 source $HOME/.bash_profile #Allows conda use
 conda activate tbrucei #Activates tbrucei env
 
-cd bowtie/blood/ #Moves into bowtie outdir for blood sample
+
+#settind directories
+#replace XXX with file path to home directory
+PD=XXX
+
+cd "$PD"/bowtie/blood/ #Moves into bowtie outdir for blood sample
 
 SAMPLE="Blood"$SLURM_ARRAY_TASK_ID #Sets sample names
 
@@ -22,7 +27,8 @@ samtools view -bS "$SAMPLE.sam.gz" > "$SAMPLE.bam" #Converts from SAM to BAM
 samtools sort "$SAMPLE.bam" -o "sorted_$SAMPLE.bam" #Sorts the BAM
 samtools index "sorted_$SAMPLE.bam" #Indexes sorted BAM
 
-cd ../csf #Moves into bowtie outdir for csf samples
+cd 
+cd "$PD"/csf #Moves into bowtie outdir for csf samples
 
 SAMPLE="CSF"$SLURM_ARRAY_TASK_ID
 
@@ -31,4 +37,5 @@ samtools sort "$SAMPLE.bam" -o "sorted_$SAMPLE.bam"
 samtools index "sorted_$SAMPLE.bam"
 #Runs as above on the other samples
 
+conda deactivate
 

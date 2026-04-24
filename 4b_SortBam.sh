@@ -12,7 +12,11 @@
 
 module load samtools-uoneasy/1.18-GCC-12.3.0
 
-cd XXX/bowtie
+#settind directories
+#replace XXX with file path to home directory
+PD=XXX
+
+cd "$PD"/bowtie
 
 
 SAMPLE="Blood"$SLURM_ARRAY_TASK_ID
