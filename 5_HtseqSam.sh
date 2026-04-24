@@ -17,19 +17,28 @@ conda activate tbrucei
 BLOOD="Blood"$SLURM_ARRAY_TASK_ID".sam.gz"
 CSF="CSF"$SLURM_ARRAY_TASK_ID".sam.gz"
 
+#settind directories
+#replace XXX with file path to home directory
+PD=XXX
+
 #Input file paths for sorted BAM files and gene annotation
-BLOOD_PATH=XXX/bowtie/blood/$BLOOD
-CSF_PATH=XXX/bowtie/csf/$CSF
-GENE=XXX/ReferenceGenomes/TBruceiRef.gff
+BLOOD_PATH="$PD"/bowtie/blood/$BLOOD
+CSF_PATH=$PD"/bowtie/csf/$CSF
+
+#if reference genomes have been moved then change this file path
+GENE="$PD"/ReferenceGenomes/TBruceiRef.gff
 
 #Output path and file names
-cd counts
+mkdir -p "$PD"/counts
+            
+OUTDIR="$PD"/counts
+
 BLOOD_OUT="Blood"$SLURM_ARRAY_TASK_ID"SAM.txt"
 CSF_OUT="CSF"$SLURM_ARRAY_TASK_ID"SAM.txt"
 
 
-htseq-count --format sam -i ID $BLOOD_PATH $GENE > $OUTDIR/$BLOOD_OUT
+htseq-count --format sam -i ID "$BLOOD_PATH" "$GENE" > "$OUTDIR"/"$BLOOD_OUT"
 
-htseq-count --format sam -i ID $CSF_PATH $GENE > $OUTDIR/$CSF_OUT
+htseq-count --format sam -i "$CSF_PATH" "$GENE" > "$OUTDIR"/"$CSF_OUT"
 
 conda deactivate

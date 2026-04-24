@@ -13,10 +13,15 @@
 source $HOME/.bash_profile #Allows conda use
 conda activate tbrucei #Activates rotation2 env
 
+#replace all XXX with pathway to reference genomes file
+
 STAR --runMode genomeGenerate \
         --genomeDir XXX/ReferenceGenomes \
         --genomeFastaFiles XXX/ReferenceGenomes/GRCh38.fa \
         --sjdbGTFfile XXX/ReferenceGenomes/GRCH38.gtf \
         --sjdbOverhang 99 \
-        --runThreadN 8 \
+        --runThreadN 8
+
 #Runs STAR to index samples. Sets overhang lenght as 99 bp, and uses 8 cores
+
+conda deactivate

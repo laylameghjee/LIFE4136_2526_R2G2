@@ -14,19 +14,27 @@
 source $HOME/.bash_profile #Allows conda use
 conda activate tbrucei #Activates tbrucei env
 
-cd XXX/STAR
-mkdir tissue
-cd ../
+#settind directories
+#replace XXX with file path to home directory
+PD=XXX
 
-READ1="XXX"$SLURM_ARRAY_TASK_ID"_1.fastq.gz"
-READ2="XXX"$SLURM_ARRAY_TASK_ID"_2.fastq.gz"
-OUT="XXX/STAR/tissue/"$SLURM_ARRAY_TASK_ID"_ts"
+mkdir -p "$PD"/STAR
+mkdir -p "$PD"/STAR/tissue
 
+#set XXX to file path to fastq files
+INDIR=XXX
+
+
+READ1="$INDIR""$SLURM_ARRAY_TASK_ID"_1.fastq.gz
+READ2="$INDIR""$SLURM_ARRAY_TASK_ID"_2.fastq.gz
+OUT="$PD"/STAR/tissue/"$SLURM_ARRAY_TASK_ID"_ts
+
+#change XXX to file path for reference genomes
 STAR --quantMode GeneCounts \
-        --genomeDir XXX/RefernceGenomes/ \
-        --readFilesIn $READ1 $READ2 \
+        --genomeDir XXX/ReferenceGenomes/ \
+        --readFilesIn "$READ1" "$READ2" \
         --readFilesCommand zcat \
         --runThreadN 32 \
-        --outFileNamePrefix $OUT
+        --outFileNamePrefix "$OUT"
 
 

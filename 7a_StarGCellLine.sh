@@ -9,23 +9,30 @@
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=fail
 #SBATCH --mail-type=end
+#SBATCH --array=93-96
 
 source $HOME/.bash_profile #Allows conda use
 conda activate tbrucei #Activates conda env
 
-mkdir STAR
-cd STAR
-mkdir cell_line
-cd ../
+#settind directories
+#replace XXX with file path to home directory
+PD=XXX
 
-READ1="XXX"$SLURM_ARRAY_TASK_ID"_1.fastq.gz"
-READ2="XXX"$SLURM_ARRAY_TASK_ID"_2.fastq.gz"
-OUT="XXX"$SLURM_ARRAY_TASK_ID"_cl"
+mkdir -p "$PD"/STAR
+mkdir -p "$PD"/STAR/cell_line
+
+#set XXX to file path to fastq files
+INDIR=XXX
+
+READ1="$INDIR""$SLURM_ARRAY_TASK_ID"_1.fastq.gz
+READ2="$INDIR""$SLURM_ARRAY_TASK_ID"_2.fastq.gz
+OUT=$PD"/STAR/cell_line/"$SLURM_ARRAY_TASK_ID"_cl
 #Sets sample names for each read
 
+#change XXX to file path for reference genomes
 STAR --quantMode GeneCounts \
         --genomeDir XXX/ReferenceGenomes/ \
-        --readFilesIn $READ1 $READ2 \
+        --readFilesIn "$READ1" "$READ2" \
         --readFilesCommand zcat \
         --runThreadN 32 \
-        --outFileNamePrefix $OUT
+        --outFileNamePrefix "$OUT"

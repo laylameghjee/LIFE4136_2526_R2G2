@@ -17,21 +17,27 @@ conda activate tbrucei
 BLOOD="sorted_Blood"$SLURM_ARRAY_TASK_ID".bam"
 CSF="sorted_CSF"$SLURM_ARRAY_TASK_ID".bam"
 
+#settind directories
+#replace XXX with file path to home directory
+PD=XXX
+
 #Input file paths for sorted BAM files and gene annotation
-BLOOD_PATH=XXX/bowtie/blood/$BLOOD
-CSF_PATH=XXX/bowtie/csf/$CSF
-GENE=XXX/ReferenceGenomes/TBruceiRef.gff
+BLOOD_PATH="$PD"/bowtie/blood/$BLOOD
+CSF_PATH=$PD"/bowtie/csf/$CSF
+
+#if reference genomes have been moved then change this file path
+GENE="$PD"/ReferenceGenomes/TBruceiRef.gff
 
 #Output path and file names
-mkdir counts
-cd counts
+mkdir -p "$PD"/counts
 
+OUTDIR="$PD"/counts
 BLOOD_OUT="Blood"$SLURM_ARRAY_TASK_ID".tsv"
 CSF_OUT="CSF"$SLURM_ARRAY_TASK_ID".tsv"
 
 
-htseq-count --format bam -a 0 -t mRNA -i ID $BLOOD_PATH $GENE > $OUTDIR/$BLOOD_OUT
-htseq-count --format bam -a 0 -t mRNA -i ID $CSF_PATH $GENE > $OUTDIR/$CSF_OUT
-#Runs htseq on both samples with 8 cores
+htseq-count --format bam -a 0 -t mRNA -i ID "$BLOOD_PATH" "$GENE" > "$OUTDIR"/"$BLOOD_OUT"
+htseq-count --format bam -a 0 -t mRNA -i ID "$CSF_PATH" "$GENE" > "$OUTDIR"/"$CSF_OUT"
+#Runs htseq on both samples
 
 conda deactivate
