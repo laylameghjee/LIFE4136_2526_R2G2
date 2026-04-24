@@ -4,13 +4,8 @@
 
 [Project Overview](#project-overview)  
 [Biological Background](#biological-background)  
-[Prerequisites](#prerequisites)  
-- [Data Overview](#data-overview)  
--- [Reference Files](#reference-files)  
--- [Cloning the Git repository](#cloning-the-git-repository)  
+[Prerequisites](#prerequisites)   
 [Tools](#tools)   
-- [Environment Set up](#environment-set-up)
-- []
 [Analysis](#analysis)  
 [Troubleshooting](#troubleshooting)    
 [Authors](#authors)  
@@ -19,6 +14,11 @@
 ## Project Overview 
 
 This repository contains the scripts, reference files, and documentation used for the RNA-seq analysis completed for the LIFE4136 25/26 module. The repository is intended to allow another user to understand the workflow, recreate the computational environment and reproduce the analysis steps in the correct order. 
+
+This project is split into two parts:  
+Part One: comparing the T. brucei gene expression between samples from the blood and cerebrospinal fluid.  
+
+Part Two: comparing gene expression between glioma tissue and glioma cell line samples.  
 
 ### Biological Background
 
@@ -35,34 +35,48 @@ The samples used within this part of the study were cells in blood and cells in 
 Part two of the analysis focused on analysing human cancer samples for differential gene expression, specifically comparing glioma tissue with a glioma cell line. Gliomas are tumours that arise from glial cells within the central nervous system. By comparing these two sample types, the aim is to identify differences in gene expression that may reflect tumour biology and changes in cellular processes associated with disease progression. 
 
 
-## Prerequisites 
-
 ## Data Overview 
 
 Part One: Trypanosoma brucei  
 
-Organism - Trypanosoma brucei  
-Sample Types - blood and cerebrospinal fluid  
-Number of samples - 9 
-Sample IDs - Blood1 - Blood5 and CSF1 - CSF4  
-Read Type - single end  
-Original Input format - compressed FASTQ files  
-File Size - between 2.5G and 7.4G
+|Category               | Details                |
+|-----------------------|------------------------|
+| Organism              | Trypanosoma brucei     | 
+| Sample Types          | Blood                  |
+|                       | Cerebrospinal fluid    |
+| Number of samples     | 9                      |
+| Sample IDs            | Blood1 - Blood5        |
+|                       | CSF1 - CSF4            |
+| Read Type             | single end             |
+| Original Input format | compressed FASTQ files |  
+| File Size             | 2.5G - 7.4G            |
 
 Part Two: Human Glioma RNA-seq data  
 
-Organism - Homo sapiens  
-Sample Types - glioma tissue and glioma cell line  
-Number of samples - 10 Biological Samples producing 20 FASTQ files
-Sample IDs - ERR1404775_1 & ERR1404775_2 - ERR1404780_1 & ERR1404780_2 and ERR1404793_1 & ERR1404793_2 - ERR1404796_1 & ERR1404796_2
-Read Type - paired end  
-Original Input format - compressed FASTQ files 
-File Size - between 877M and 1.9G 
+|Category               | Details                 |
+|-----------------------|-------------------------|
+| Organism              | Homo Sapiens            | 
+| Sample Types          | Glioma tissue           |
+|                       | Glioma cell line        |
+| Number of samples     | 10 Biological Samples   |
+|                       | Produced 20 FASTQ files |
+| Sample IDs            | ERR1404775 - ERR1404780 |
+|                       | ERR1404793 - ERR1404796 |
+| Read Type             | paired end              |
+| Original Input format | compressed FASTQ files  |  
+| File Size             | 877M - 1.9G             |
+ 
+
+ Please not that the user is requored to provide raw FASTQ files, these are not included within this repository. 
 
 ### Reference Files
 
-All references files used within this project are stored within the ```ReferenceGenomes ``` directory. Contains T. brucei and Homo sapiens (GRCh38) reference genome and annotation files that are used for alignment and indexing. For your reference, the files provided have been downloaded [here](https://tritrypdb.org) for the T. brucei and [here](https://www.ensembl.org) for the Homo sapiens (GRCh38). 
+All reference files used within this project are stored within the ```ReferenceGenomes ``` directory. This directory contains T. brucei and Homo sapiens (GRCh38) reference genome and annotation files that are used for alignment and indexing. For your reference, the files provided were downloaded [here](https://tritrypdb.org) for the T. brucei and [here](https://www.ensembl.org) for the Homo sapiens (GRCh38). 
 
+
+## Prerequisites  
+
+Below are steps to follow in order to have the correct set up and environment in order to reproduce the analysis. 
 
 ### Cloning the Git repository
 
@@ -107,6 +121,7 @@ conda create python=3.10 -n tbrucei
 ``` 
 It is vital to specify the version of python, so ensure that part is included. 
 
+
 ### Main command-line tools  
 
 Once the conda environment has been created then install the following packages. Install by typing `conda install` followed by the package name and then version into the command line. An example would be 
@@ -134,7 +149,7 @@ R and RStudio
 
 If you don't already have either R or RStudio installed, you will need to install one of them for the additional analysis within this project. Please follow the installation instructions [here](https://rstudio-education.github.io/hopr/starting.html) ensuring you follow the correct instructions for your local machine. 
 
-Any additional packages needed within R and RStudio are specified within the scripts and the scripts will install them for you but they are listed below. 
+Any additional packages needed within R and RStudio are specified within the scripts and running the scripts will install them for you. However they are all listed below
 
 
 | Tool        | Version | 	        Links                                                          |
@@ -158,6 +173,8 @@ Each numbered step below corresponds to the numbered script. The scripts should 
  - Absolute paths if your files are stored elsewhere on your systems  
 
 These scripts were developed for use on an HPC system using SLURM. They may also be adapted for local use, although some steps may take longer and/or require more memory. 
+
+In order to submit the scripts, on the command line of the terminal use the sbatch command. An example would be ```sbatch 1_QC.sh```
 
 ### Part One
 
@@ -197,7 +214,7 @@ Output(s): BAM files
 
 Script name: 4b_SortBam.sh  
 Input(s): BAM files   
-Output(s): sorted BAM files and .bai index files   
+Output(s): sorted BAM files  
 
 **5.**	Generate read counts with HTSeq
 
@@ -250,7 +267,19 @@ Input(s): paired compressed fastq files
 Output(s): aligned SAM file, STAR log files, readspergene.tab file, SJ.tab file  
 
 
-You can then do further analysis on the human cancer samples including: DESeq2, a heatmap and a PCA graph.
+### Additional Analysis and Visualisation 
+
+**A1.** Using IGV to visualise 
+
+Use the IGV software to look at the distribution of mapped reads for one or more of the samples. 
+
+For A2 – A4 below, all the visualisations can be done using the AA2 script. This script should be run in R or RStudio. Any packages used within this analysis install as part of the scripts. 
+
+**A2.** Use DESeq2 in R to visualise 
+
+**A3.** Use R to create clustered heatmap of sample to sample 
+
+**A4.** Use R to create PCA graph of samples
 
 ## Troubleshooting 
 
@@ -261,6 +290,7 @@ Input files cannot be found
 Reference genomes missing  
 - Confirm all required files are present in the ```ReferenceGenomes``` directory  
 - For Part Two ensure you have unzipped the files before running the scripts  
+- Double check paths and ensure paths in the script are correct to where you saved the files  
 
 Scripts not running on a local machine 
 - As these scripts were written for use on an HPC system with SLURM there may be issues when running on a local machine  
@@ -268,11 +298,14 @@ Scripts not running on a local machine
 - Some steps, especially indexing and alignment might require more memory and longer runtimes on a local machine  
 
 R packages not installing  
-- If the R packages are not installing correctly when running the script, try running just the installation lines alone
+- If the R packages are not installing correctly when running the script, try running just the installation lines alone  
+- Check if you already have certain packages installed  
 
 Script not running as expected 
 - Ensure that the previous step has run correctly and the output files are what are expected
-- Ensure all input paths are correct
+- Ensure all input paths are correct   
+- Ensure all XXX within scripts have been changed  
+- Try using absolute paths to resolve any path issues
 
 ## Authors
 
