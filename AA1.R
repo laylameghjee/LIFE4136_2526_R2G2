@@ -1,11 +1,13 @@
 #Install packages 
 #If you already have these packages, then can comment out certain lines
-install.packages("DESeq2")
 install.packages("ggplot2")
 install.packages("pheatmap")
 install.packages("readr")
 install.packages("tidyverse")
 install.packages("RColorBrewer")
+if (!require("BiocManager",  quiet= TRUE))
+  install.packages("BiocManager")
+BiocManager::install("DESeq2")
 
 #library all packages into current workspace
 library(DESeq2)
@@ -15,7 +17,10 @@ library(readr)
 library(tidyverse)
 library(RColorBrewer)
 
-#importing data from the counts files
+#replace with path to working directory
+setwd("XXX")
+
+#replace XXX with file path to htseq count output
 directory <- "XXX/counts/"
 
 #lists all files within the directory and removes .tsv at the end 
